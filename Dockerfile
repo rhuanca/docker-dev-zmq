@@ -12,10 +12,11 @@ RUN apt-get install -y build-essential
 
 # install zmq
 RUN git clone https://github.com/zeromq/libzmq
-RUN mkdir cmake-build && cd cmake-build
-RUN cmake .. && make -j 4
+RUN cd libzmq && mkdir cmake-build && cd cmake-build && cmake .. && make -j 4 && make install && ldconfig
+
+# RUN cmake .. && make -j 4
 #RUN make test && make install && sudo ldconfig
-RUN make install && ldconfig
+#RUN make install && ldconfig
 
 # setup sshd
 RUN apt-get install -y openssh-server
